@@ -1,0 +1,4 @@
+aiogram==3.*
+aiogram-newsletter>=0.0.1
+cachetools~=5.3.3
+redis~=5.0.2
