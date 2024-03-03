@@ -9,7 +9,7 @@
 ![Downloads](https://pepy.tech/badge/aiogram-newsletter/week)
 
 * Bot example: [@aiogramNewsletterBot](https://t.me/aiogramNewsletterBot/).
-* Code example: [source code](https://github.com/nessshon/aiogram-newsletter/example)
+* Code example: [source code](https://github.com/nessshon/aiogram-newsletter/tree/main/example)
 
 ## Installation
 
