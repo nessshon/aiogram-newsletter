@@ -41,7 +41,7 @@ class TextMessage:
             "send_buttons_error": (
                 "There was an error processing the provided button information. "
                 "Please ensure that each button is formatted correctly:\n"
-                "<code>Button text | link</code>"
+                "<code>Button text | link</code>\n"
                 "Example:\n"
                 "<code>Text | https://example.com</code>\n\n"
                 "If you encounter issues, check for typos, missing links, or incorrect formatting."
@@ -120,7 +120,7 @@ class TextMessage:
             "send_buttons_error": (
                 "Произошла ошибка при обработке предоставленной информации о кнопках. "
                 "Пожалуйста, убедитесь, что каждая кнопка отформатирована правильно:\n"
-                "<code>Текст кнопки | ссылка</code>"
+                "<code>Текст кнопки | ссылка</code>\n"
                 "Пример:\n"
                 "<code>Текст | https://example.com</code>\n\n"
                 "Если возникли проблемы, проверьте наличие опечаток, отсутствие ссылок или неверное форматирование."
