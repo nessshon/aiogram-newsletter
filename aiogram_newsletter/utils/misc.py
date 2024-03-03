@@ -6,8 +6,10 @@ from typing import Union, Any, List, Tuple
 
 from aiogram import Bot
 from aiogram.fsm.context import FSMContext
-from aiogram.types import Message
+from aiogram.types import Message, User
 from aiogram.exceptions import TelegramRetryAfter, TelegramBadRequest
+
+from aiogram_newsletter.utils.texts import TextMessage
 
 
 async def send_message(bot: Bot, chat_id: int, message_data: dict) -> bool:
@@ -43,18 +45,20 @@ async def run_newsletter(bot: Bot, users_ids: List[int], message_data: dict) -> 
     return successful, unsuccessful
 
 
-async def run_newsletter_task(users_ids: list[int], message_data: dict) -> None:
+async def run_newsletter_task(users_ids: list[int], user_data: dict, message_data: dict) -> None:
     loop = asyncio.get_running_loop()
-    an_manager = loop.__getattribute__("an_manager")
+    bot: Bot = loop.__getattribute__("bot")
 
-    text = an_manager.text_message.get("newsletter_started")
-    await an_manager.send_message(text)
+    user: User = User(**user_data)
+    text_message = TextMessage(user.language_code)
 
-    text = an_manager.text_message.get("newsletter_ended")
-    successful, unsuccessful = await run_newsletter(an_manager.bot, users_ids, message_data)
+    text = text_message.get("newsletter_started")
+    await bot.send_message(user.id, text=text)
+
+    text = text_message.get("newsletter_ended")
+    successful, unsuccessful = await run_newsletter(bot, users_ids, message_data)
     text = text.format(total=len(users_ids), successful=successful, unsuccessful=unsuccessful)
-
-    await an_manager.bot.send_message(an_manager.user.id, text=text)
+    await bot.send_message(user.id, text=text)
 
 
 def validate_url(url: str) -> Union[str, None]:

@@ -161,11 +161,12 @@ class AiogramNewsletterHandlers:
         if call.data == "back":
             await an_manager.open_choose_options_window()
         elif call.data == "confirm":
-            message_data = await an_manager.data_storage.get_data("message_data")
             state_data = await an_manager.state.get_data()
             users_ids = state_data.get("users_ids")
+            user_data = an_manager.user.model_dump()
+            message_data = await an_manager.data_storage.get_data("message_data")
 
-            _ = asyncio.create_task(run_newsletter_task(users_ids, message_data))
+            _ = asyncio.create_task(run_newsletter_task(users_ids, user_data, message_data))
             await an_manager.open_newsletters_window()
 
         await call.answer()
@@ -208,16 +209,18 @@ class AiogramNewsletterHandlers:
         if call.data == "back":
             await an_manager.open_send_datetime_window()
         elif call.data == "confirm":
-            datetime_obj = await an_manager.data_storage.get_data("datetime_obj")
-            message_data = await an_manager.data_storage.get_data("message_data")
             state_data = await an_manager.state.get_data()
             users_ids = state_data.get("users_ids")
+            user_data = an_manager.user.model_dump()
+            message_data = await an_manager.data_storage.get_data("message_data")
+            datetime_obj = await an_manager.data_storage.get_data("datetime_obj")
 
             an_manager.apscheduler.add_job(
                 func=run_newsletter_task,
                 trigger=DateTrigger(datetime_obj),
                 kwargs={
                     "users_ids": users_ids,
+                    "user_data": user_data,
                     "message_data": message_data,
                 },
             )

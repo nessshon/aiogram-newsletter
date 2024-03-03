@@ -16,12 +16,10 @@ class AiogramNewsletterMiddleware(BaseMiddleware):
     def __init__(
             self,
             apscheduler: AsyncIOScheduler,
-            language_code: str = None,
             text_message: Optional[TextMessage] = None,
             inline_keyboard: Optional[InlineKeyboard] = None,
     ) -> None:
         self.apscheduler = apscheduler
-        self.language_code = language_code
         self.text_message = text_message
         self.inline_keyboard = inline_keyboard
 
@@ -33,9 +31,8 @@ class AiogramNewsletterMiddleware(BaseMiddleware):
     ) -> Any:
         user: User = data.get("event_from_user")
 
-        language_code = self.language_code or user.language_code
-        text_message = self.text_message or TextMessage(language_code)
-        inline_keyboard = self.inline_keyboard or InlineKeyboard(language_code)
+        text_message = self.text_message or TextMessage(user.language_code)
+        inline_keyboard = self.inline_keyboard or InlineKeyboard(user.language_code)
 
         an_manager = ANManager(
             apscheduler=self.apscheduler,
@@ -46,6 +43,6 @@ class AiogramNewsletterMiddleware(BaseMiddleware):
 
         data["an_manager"] = an_manager
         loop = asyncio.get_running_loop()
-        loop.__setattr__("an_manager", an_manager)
+        loop.__setattr__("bot", event.bot)
 
         return await handler(event, data)
