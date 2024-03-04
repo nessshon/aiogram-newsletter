@@ -1,4 +1,5 @@
 from contextlib import suppress
+from datetime import datetime
 from typing import Dict, Any, Union, Optional, Callable, Awaitable, List
 
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
@@ -11,6 +12,7 @@ from aiogram.types import (
     Message,
     User,
 )
+from pytz import timezone
 
 from .utils.exceptions import (
     MESSAGE_DELETE_ERRORS,
@@ -73,7 +75,7 @@ class ANManager:
         total_pages = (len(items) + page_size - 1) // page_size
         text = self.text_message.get("newsletters")
         reply_markyp = self.inline_keyboard.newsletters(page_items, page, total_pages)
-
+        text = text.format(total=len(state_data.get("users_ids")))
         message = await self.send_message(text, reply_markup=reply_markyp)
         await self.state.set_state(ANState.newsletters)
         return message
@@ -155,6 +157,8 @@ class ANManager:
         if not text:
             text = self.text_message.get("send_datetime")
         reply_markyp = self.inline_keyboard.back()
+        datetime_now = datetime.now(timezone(self.apscheduler.timezone))
+        text = text.format(datetime_string=datetime_now.strftime("%Y-%m-%d %H:%M"))
 
         message = await self.send_message(text, reply_markup=reply_markyp)
         await self.state.set_state(ANState.send_datetime)

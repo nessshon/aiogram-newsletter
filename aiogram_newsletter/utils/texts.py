@@ -11,6 +11,7 @@ class TextMessage:
             "newsletters": (
                 "Newsletter menu\n\n"
                 "<b>Add</b> - add/launch a scheduled newsletter\n\n"
+                "• Total users: <b>{total}</b>\n\n"
                 "List of scheduled newsletters:"
             ),
             "newsletter": (
@@ -63,14 +64,14 @@ class TextMessage:
                 "Send the date and time for the newsletter launch in the format:\n"
                 "<code>YYYY-MM-DD HH:MM</code>\n"
                 "Example:\n"
-                "<code>2031-11-01 12:00</code>"
+                "<code>{datetime_string}</code>"
             ),
             "send_datetime_error": (
                 "There was an error processing the provided date and time. "
                 "Please ensure that the format is correct:\n"
                 "<code>YYYY-MM-DD HH:MM</code>\n"
                 "Example:\n"
-                "<code>2031-11-01 12:00</code>"
+                "<code>{datetime_string}</code>"
             ),
             "confirmation_later": (
                 "Are you sure you want to confirm and postpone the newsletter?"
@@ -80,7 +81,7 @@ class TextMessage:
             ),
             "newsletter_ended": (
                 "The newsletter has been successfully completed for a total of {total} users.\n\n"
-                "Successful: {successful} | Unsuccessful: {unsuccessful}"
+                "Successful: <b>{successful}</b> • Unsuccessful: <b>{unsuccessful}</b>"
             ),
         },
         "ru": {
@@ -90,6 +91,7 @@ class TextMessage:
             "newsletters": (
                 "Меню рассылки\n\n"
                 "<b>Добавить</b> - добавить/запустить отложенную рассылку\n\n"
+                "• Всего пользователей: <b>{total}</b>\n\n"
                 "Список отложенных рассылок:"
             ),
             "newsletter": (
@@ -142,14 +144,14 @@ class TextMessage:
                 "Отправьте дату и время для запуска рассылки в формате:\n"
                 "<code>YYYY-MM-DD HH:MM</code>\n"
                 "Пример:\n"
-                "<code>2031-11-01 12:00</code>"
+                "<code>{datetime_string}</code>"
             ),
             "send_datetime_error": (
                 "Произошла ошибка при обработке предоставленной даты и времени. "
                 "Пожалуйста, убедитесь, что формат правильный:\n"
                 "<code>YYYY-MM-DD HH:MM</code>\n"
                 "Пример:\n"
-                "<code>2031-11-01 12:00</code>"
+                "<code>{datetime_string}</code>"
             ),
             "confirmation_later": (
                 "Вы уверены, что хотите подтвердить и отложить рассылку?"
@@ -159,7 +161,7 @@ class TextMessage:
             ),
             "newsletter_ended": (
                 "Рассылка успешно завершена для общего числа пользователей: {total}.\n\n"
-                "Успешные: {successful} | Неуспешные: {unsuccessful}"
+                "Успешные: <b>{successful}</b> • Неуспешные: <b>{unsuccessful}</b>"
             ),
         }
     }
