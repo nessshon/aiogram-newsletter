@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="aiogram-newsletter",
-    version="0.0.7",
+    version="0.0.8",
     author="nessshon",
     description="Newsletter handler for aiogram bots.",
     long_description=long_description,
@@ -13,7 +13,7 @@ setuptools.setup(
     packages=setuptools.find_packages(exclude=["example"]),
     install_requires=[
         "aiogram>=3",
-        "apscheduler>=3.10",
+        "apscheduler==3.10",
     ],
     classifiers=[
         "Programming Language :: Python :: 3.8",
