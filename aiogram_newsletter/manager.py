@@ -12,7 +12,6 @@ from aiogram.types import (
     Message,
     User,
 )
-from pytz import timezone
 
 from .utils.exceptions import (
     MESSAGE_DELETE_ERRORS,
@@ -157,7 +156,7 @@ class ANManager:
         if not text:
             text = self.text_message.get("send_datetime")
         reply_markyp = self.inline_keyboard.back()
-        datetime_now = datetime.now(timezone(self.apscheduler.timezone))
+        datetime_now = datetime.now()
         text = text.format(datetime_string=datetime_now.strftime("%Y-%m-%d %H:%M"))
 
         message = await self.send_message(text, reply_markup=reply_markyp)
