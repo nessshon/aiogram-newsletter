@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="aiogram-newsletter",
-    version="0.0.8",
+    version="0.0.9",
     author="nessshon",
     description="Newsletter handler for aiogram bots.",
     long_description=long_description,
