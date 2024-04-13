@@ -51,6 +51,26 @@ class ANManager:
         return_callback = await self.data_storage.get_data("return_callback")
         await return_callback(**self.middleware_data)
 
+    async def update_interfaces_language(self, language_code: str) -> None:
+        """
+        Update interfaces language.
+
+        :param language_code: The language code to update to.
+        :raise LanguageCodeNotSupported: If the provided language code is not supported.
+        """
+        if (
+                language_code in self.text_message.text_messages and
+                language_code in self.inline_keyboard.text_buttons
+        ):
+            await self.state.update_data(language_code=language_code)
+            self.user.language_code = language_code
+            self.text_message.language_code = self.inline_keyboard.language_code = language_code
+            return None
+
+        raise ValueError(
+            f"Language code '{language_code}' not in text message or button text"
+        )
+
     async def newsletter_menu(
             self,
             users_ids: List[int],
