@@ -63,7 +63,6 @@ class ANManager:
                 language_code in self.inline_keyboard.text_buttons
         ):
             await self.state.update_data(language_code=language_code)
-            self.user.language_code = language_code
             self.text_message.language_code = self.inline_keyboard.language_code = language_code
             return None
 
