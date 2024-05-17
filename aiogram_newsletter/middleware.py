@@ -32,7 +32,7 @@ class AiogramNewsletterMiddleware(BaseMiddleware):
     ) -> Any:
         chat: Chat = data.get("event_chat")
 
-        if chat.type == "private":
+        if chat and chat.type == "private":
             user: User = data.get("event_from_user")
             state: FSMContext = data.get("state")
 
