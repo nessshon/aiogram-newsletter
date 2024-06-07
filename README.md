@@ -17,10 +17,6 @@
 pip install aiogram-newsletter
 ```
 
-## Usage
-
-* Coming soon...
-
 ## Features
 
 * Ready-to-Use User Interface
